@@ -1,39 +1,78 @@
-import os
 import json
+import requests
+
 from flask import Flask, Response
 from flask_cors import CORS
+
+from urllib.parse import unquote
+
+import wikipedia as wiki
+from wikipedia.exceptions import PageError, DisambiguationError
+
 from Article import Article
+
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/")
-def home():
-    return "WikiQuiz API is running!"
 
-@app.route("/quiz/<path:article_name>/", methods=["GET"])
+@app.route('/quiz/<path:article_name>/', methods=['GET'])
 def get_quiz(article_name):
     try:
-        a = Article(article_name)
+        if article_name.startswith("http"):
+            if "/wiki/" in article_name:
+                article_name = article_name.split("/wiki/")[-1]
+            else:
+                raise PageError(article_name)
 
-        questions = []
-        for q in a.quiz.get_ten_random():
-            questions.append((q.text, q.gaps))
+        article_name = unquote(article_name)
+        article_name = article_name.replace("_", " ")
 
-        data = json.dumps({
-            "sentences": questions,
-            "propers": a.quiz.get_random_propers()
+        response_data = []
+
+        article = Article(article_name)
+
+        for question in article.quiz.get_ten_random():
+            response_data.append((question.text, question.gaps))
+
+        data_send = json.dumps({
+            "sentences": response_data,
+            "propers": article.quiz.get_random_propers()
         })
 
-        return Response(data, status=200, mimetype="application/json")
+        resp = Response(data_send, status=200, mimetype='application/json')
+        resp.headers['Access-Control-Allow-Origin'] = "*"
+        return resp
+
+    except DisambiguationError:
+        return Response(
+            json.dumps({
+                "error": "Topic is ambiguous. Please use a more specific name or full Wikipedia URL."
+            }),
+            status=400,
+            mimetype='application/json'
+        )
+
+    except PageError:
+        return Response(
+            json.dumps({
+                "error": "Wikipedia page not found. Please check spelling or URL."
+            }),
+            status=404,
+            mimetype='application/json'
+        )
 
     except Exception as e:
         return Response(
-            json.dumps({"error": str(e)}),
-            status=400,
-            mimetype="application/json"
+            json.dumps({
+                "error": "Internal server error",
+                "details": str(e)
+            }),
+            status=500,
+            mimetype='application/json'
         )
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run(host='127.0.0.1', port=5000)
