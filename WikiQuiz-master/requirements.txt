@@ -1,0 +1,9 @@
+Flask==0.12
+flask-cors==3.0.10
+wikipedia
+beautifulsoup4
+requests
+jinja2==2.11.3
+werkzeug==0.16.1
+markupsafe==1.1.1
+itsdangerous==0.24

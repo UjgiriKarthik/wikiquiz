@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WikiQuiz</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="header">
+      <h1>WikiQuiz</h1>
+      <p>Turn Wikipedia into a fun quiz!</p>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-box">
+      <input 
+        id="article_name_input"
+        type="text"
+        placeholder="Paste Wikipedia URL or type topic (e.g. Sachin Tendulkar)">
+      <button onclick="new_article_query()">Quiz Me</button>
+    </section>
+
+    <!-- Quiz Card -->
+    <section class="quiz-card">
+
+      <h2 id="article_name">Welcome!</h2>
+
+      <p id="question_body">
+        Enter a Wikipedia topic above and click <b>Quiz Me</b> to generate
+        fill-in-the-blank questions automatically.
+      </p>
+
+      <!-- Options -->
+      <div class="options">
+        <button id="answer_a" onclick="answered_a()">A</button>
+        <button id="answer_b" onclick="answered_b()">B</button>
+        <button id="answer_c" onclick="answered_c()">C</button>
+      </div>
+
+      <!-- Result -->
+      <h3 id="answer_response_label" class="result">
+        Select an answer
+      </h3>
+
+      <!-- Next -->
+      <button id="next_question_btn" class="next-btn" onclick="load_question()">
+        Next Question →
+      </button>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Wikipedia Quiz</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

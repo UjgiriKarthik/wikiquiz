@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f6f7f9, #ffffff);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  height:83vh;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #4a4a4a;
+}
+
+.header p {
+  color: #777;
+  margin-top: 5px;
+}
+
+/* Search Box */
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.search-box button {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #667eea;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-box button:hover {
+  background: #797a80;
+}
+
+/* Quiz Card */
+.quiz-card {
+  background: #f9fafc;
+  padding: 25px;
+  border-radius: 14px;
+}
+
+.quiz-card h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.quiz-card p {
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Options */
+.options {
+  display: flex;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.options button {
+  flex: 1;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #e0e7ff;
+  color: #333;
+  transition: 0.3s;
+}
+
+.options button:hover {
+  background: #c7d2fe;
+}
+
+/* Result */
+.result {
+  text-align: center;
+  margin: 15px 0;
+  font-weight: 600;
+}
+
+/* Next Button */
+.next-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.1rem;
+  background: #34d399;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.next-btn:hover {
+  background: #2bb583;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: #777;
+}
